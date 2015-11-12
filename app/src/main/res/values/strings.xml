@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JavaDrone</string>
+    <string name="title_activity_control_screen">ControlScreen</string>
+</resources>
