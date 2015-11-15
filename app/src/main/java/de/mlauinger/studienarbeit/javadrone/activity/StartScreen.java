@@ -1,6 +1,8 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +26,15 @@ public class StartScreen extends AppCompatActivity {
         dronCon = new DroneController();
     }
 
+    private Builder turnOnWiFiDialog;
 
     public void doConnect(View view) {
         if(connManager.isWifiEnabled()) {
-            ARDrone drone = dronCon.initializeConnection();
+            dronCon.initializeConnection();
+            Intent startControls = new Intent(this, ControlScreen.class);
+            startActivity(startControls);
+        } else {
+            turnOnWiFiDialog.show();
         }
 
     }

@@ -15,7 +15,8 @@
         android:layout_below="@+id/flyright"
         android:layout_alignLeft="@+id/landing"
         android:layout_alignStart="@+id/landing"
-        android:enabled="true" />
+        android:enabled="true"
+        android:onClick="doTakeOff"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

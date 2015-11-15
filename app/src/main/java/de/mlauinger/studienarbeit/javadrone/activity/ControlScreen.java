@@ -1,20 +1,46 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import de.mlauinger.studienarbeit.javadrone.R;
+import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 
 public class ControlScreen extends AppCompatActivity {
+
+    DroneController droneController;
+    Button landing;
+    Button takeoff;
+    Button emergency;
+    Button flyleft;
+    Button flyright;
+    Button flyrforward;
+    Button flyrbackward;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
+        droneController = new DroneController();
+        landing = (Button) findViewById(R.id.landing);
+        takeoff = (Button) findViewById(R.id.takeoff);
+        emergency = (Button) findViewById(R.id.emergency);
+        flyleft = (Button) findViewById(R.id.flyleft);
+        flyright = (Button) findViewById(R.id.flyright);
+        flyrforward = (Button) findViewById(R.id.flyforward);
+        flyrbackward = (Button) findViewById(R.id.flybackward);
     }
 
+    public void doTakeOff(View view) {
+        droneController.performTakeOff();
+        takeoff.setEnabled(false);
+        landing.setEnabled(true);
+        flyleft.setEnabled(true);
+        flyright.setEnabled(true);
+        flyrforward.setEnabled(true);
+        flyrbackward.setEnabled(true);
+    }
 }

@@ -1,11 +1,5 @@
-/**
- * Created by marco on 12.11.15.
- */
-
 package de.mlauinger.studienarbeit.javadrone.controller;
 
-import android.content.Context;
-import android.net.wifi.WifiManager;
 
 import com.codeminders.ardrone.ARDrone;
 
@@ -13,11 +7,17 @@ import java.io.IOException;
 
 public class DroneController {
 
+    private static ARDrone drone;
+    private static final long CONNECT_TIMEOUT = 3000;
+
     public ARDrone initializeConnection() {
-        ARDrone drone;
         try {
             drone = new ARDrone();
             drone.connect();
+            drone.clearEmergencySignal();
+
+            // Wait until drone is ready
+            drone.waitForReady(CONNECT_TIMEOUT);
         } catch (IOException e) {
             System.err.println("NO ARDRONE FOUND!!!");
             drone = null;
@@ -25,5 +25,13 @@ public class DroneController {
         return drone;
     }
 
+    public void performTakeOff() {
+        try {
+            drone.trim();
+            drone.takeOff();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 }
