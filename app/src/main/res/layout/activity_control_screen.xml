@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ControlScreen">
+    tools:context=".ControlScreen">
 
 
     <Button
+        android:id="@+id/takeoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take Off"
-        android:id="@+id/takeoff"
-        android:layout_below="@+id/flyright"
         android:layout_alignLeft="@+id/landing"
         android:layout_alignStart="@+id/landing"
+        android:layout_below="@+id/flyright"
         android:enabled="true"
-        android:onClick="doTakeOff"/>
+        android:onClick="doTakeOff"
+        android:text="Take Off" />
 
     <Button
+        android:id="@+id/flyleft"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&lt;-"
-        android:id="@+id/flyleft"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:enabled="false" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="^"
-        android:id="@+id/flyforward"
-        android:layout_above="@+id/flyleft"
-        android:layout_toRightOf="@+id/flyleft"
-        android:layout_toEndOf="@+id/flyleft"
-        android:enabled="false" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="->"
-        android:id="@+id/flyright"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/flyforward"
-        android:layout_toEndOf="@+id/flyforward"
-        android:enabled="false" />
+        android:enabled="false"
+        android:onClick="flyLeft"
+        android:text="&lt;-" />
 
     <Button
+        android:id="@+id/flyforward"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="D"
-        android:id="@+id/flybackward"
-        android:layout_below="@+id/flyleft"
-        android:layout_toRightOf="@+id/flyleft"
+        android:layout_above="@+id/flyleft"
         android:layout_toEndOf="@+id/flyleft"
-        android:enabled="false" />
+        android:layout_toRightOf="@+id/flyleft"
+        android:enabled="false"
+        android:onClick="flyForward"
+        android:text="^" />
 
     <Button
+        android:id="@+id/flyright"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Landing"
-        android:id="@+id/landing"
-        android:layout_above="@+id/flyright"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:enabled="false" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/flyforward"
+        android:layout_toRightOf="@+id/flyforward"
+        android:enabled="false"
+        android:onClick="flyRight"
+        android:text="->" />
 
     <Button
+        android:id="@+id/flybackward"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flyleft"
+        android:layout_toEndOf="@+id/flyleft"
+        android:layout_toRightOf="@+id/flyleft"
+        android:enabled="false"
+        android:onClick="flyBackward"
+        android:text="D" />
+
+    <Button
+        android:id="@+id/landing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flyright"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:enabled="false"
+        android:text="Landing" />
+
+    <Button
+        android:id="@+id/emergency"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Emergency"
-        android:id="@+id/emergency"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="#da1f1f"
-        android:enabled="true" />
+        android:enabled="true"
+        android:onClick="doEmergency"
+        android:text="Emergency" />
 
 </RelativeLayout>

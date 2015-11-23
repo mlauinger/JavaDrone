@@ -38,4 +38,8 @@ public class StartScreen extends AppCompatActivity {
         }
 
     }
+
+    public void testClick(View view) {
+        System.out.println("Test");
+    }
 }
