@@ -77,7 +77,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:enabled="false"
-        android:text="Landing" />
+        android:text="Landing"
+        android:onClick="doLanding"/>
 
     <Button
         android:id="@+id/emergency"

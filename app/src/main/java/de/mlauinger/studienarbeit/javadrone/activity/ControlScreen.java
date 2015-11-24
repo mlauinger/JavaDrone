@@ -63,4 +63,14 @@ public class ControlScreen extends AppCompatActivity {
     public void flyRight(View view) {
         droneController.flyDrone(0, -1.0f);
     }
+
+    public void doLanding(View view) {
+        droneController.performLanding();
+        takeoff.setEnabled(true);
+        landing.setEnabled(false);
+        flyleft.setEnabled(false);
+        flyright.setEnabled(false);
+        flyrforward.setEnabled(false);
+        flyrbackward.setEnabled(false);
+    }
 }

@@ -15,11 +15,9 @@ public class DroneController {
         try {
             //drone = new ARDrone(InetAddress.getByAddress(new byte[]{(byte)-64, (byte)-88, (byte)-78, (byte)-220}), 1000, 1000);
             drone = new ARDrone();
-            //drone.connect();
-            drone.clearEmergencySignal();
-
-            // Wait until drone is ready
+            drone.connect();
             drone.waitForReady(CONNECT_TIMEOUT);
+            drone.clearEmergencySignal();
         } catch (IOException e) {
             System.err.println("NO ARDRONE FOUND!!!");
             drone = null;
@@ -54,6 +52,16 @@ public class DroneController {
         if(null != drone) {
             try {
                 drone.move(left_right, forward_backward, 0, 0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void performLanding() {
+        if(null != drone) {
+            try {
+                drone.land();
             } catch (IOException e) {
                 e.printStackTrace();
             }
