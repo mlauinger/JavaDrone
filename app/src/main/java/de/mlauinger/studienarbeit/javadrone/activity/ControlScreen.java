@@ -49,19 +49,19 @@ public class ControlScreen extends AppCompatActivity {
     }
 
     public void flyForward(View view) {
-        droneController.flyDrone(1.0f, 0);
+        droneController.flyDrone(0.1f, 0);
     }
 
     public void flyBackward(View view) {
-        droneController.flyDrone(-1.0f, 0);
+        droneController.flyDrone(-0.1f, 0);
     }
 
     public void flyLeft(View view) {
-        droneController.flyDrone(0, 1.0f);
+        droneController.flyDrone(0, 0.1f);
     }
 
     public void flyRight(View view) {
-        droneController.flyDrone(0, -1.0f);
+        droneController.flyDrone(0, 0.1f);
     }
 
     public void doLanding(View view) {
