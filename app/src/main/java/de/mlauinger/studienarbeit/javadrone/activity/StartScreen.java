@@ -1,6 +1,7 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
@@ -16,11 +17,13 @@ import java.net.UnknownHostException;
 
 import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
+import de.mlauinger.studienarbeit.javadrone.dialogs.CustomErrorDialog;
 
 public class StartScreen extends AppCompatActivity {
 
     WifiManager connManager;
     DroneController droneCon;
+    Dialog errorDialog;
 
     public StartScreen() {
     }
@@ -31,6 +34,7 @@ public class StartScreen extends AppCompatActivity {
         setContentView(R.layout.activity_start_screen);
         connManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         droneCon = new DroneController();
+        errorDialog = new CustomErrorDialog().showConnectionError(this);
     }
 
     private Builder turnOnWiFiDialog;
@@ -83,7 +87,7 @@ public class StartScreen extends AppCompatActivity {
                 return;
             }
             System.err.println("CANNOT CONNECT TO DRONE");
-            //ToDo message for not connected
+            errorDialog.show();
         }
     }
 }
