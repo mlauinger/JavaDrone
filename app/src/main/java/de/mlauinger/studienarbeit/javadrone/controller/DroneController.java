@@ -9,7 +9,7 @@ public class DroneController {
     private static ARDrone drone;
 
     public void setDrone(ARDrone arDrone) {
-        this.drone = arDrone;
+        drone = arDrone;
     }
 
     public void performTakeOff() {

@@ -56,12 +56,7 @@ public class StartScreen extends AppCompatActivity {
         startActivity(startControls);
     }
 
-    public void testClick(View view) {
-        System.out.println("Test");
-    }
-
     private class DroneConnector extends AsyncTask<ARDrone, Boolean, Boolean> {
-
 
         @Override
         protected Boolean doInBackground(ARDrone... params) {
