@@ -4,6 +4,8 @@ import com.codeminders.ardrone.ARDrone;
 
 import java.io.IOException;
 
+import de.mlauinger.studienarbeit.javadrone.R;
+
 public class DroneController {
 
     private static ARDrone drone;
@@ -29,7 +31,7 @@ public class DroneController {
             try {
                 drone.sendEmergencySignal();
             } catch (IOException e) {
-                System.err.println("CANNOT REACH DRONE");
+                System.err.println(R.string.drone_not_reachable);
             }
         }
     }

@@ -19,7 +19,7 @@
         android:layout_below="@+id/flyright"
         android:enabled="true"
         android:onClick="doTakeOff"
-        android:text="Take Off" />
+        android:text="@string/takeoff" />
 
     <Button
         android:id="@+id/flyleft"
@@ -77,7 +77,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:enabled="false"
-        android:text="Landing"
+        android:text="@string/landing"
         android:onClick="doLanding"/>
 
     <Button
@@ -89,6 +89,6 @@
         android:background="#da1f1f"
         android:enabled="true"
         android:onClick="doEmergency"
-        android:text="Emergency" />
+        android:text="@string/emergency" />
 
 </RelativeLayout>

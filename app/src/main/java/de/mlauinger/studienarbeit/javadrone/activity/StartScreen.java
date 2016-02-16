@@ -63,14 +63,13 @@ public class StartScreen extends AppCompatActivity {
             ARDrone drone = params[0];
             try {
                 drone.connect();
-                System.out.println("Connected");
                 drone.waitForReady(3000);
                 drone.playLED(1, 10, 4);
                 drone.clearEmergencySignal();
                 droneCon.setDrone(drone);
                 return true;
             } catch (IOException e) {
-                System.err.println("NO ARDRONE FOUND!!!");
+                System.err.println(R.string.drone_not_in_reach);
             }
             return false;
         }
@@ -81,7 +80,7 @@ public class StartScreen extends AppCompatActivity {
                 processToControl();
                 return;
             }
-            System.err.println("CANNOT CONNECT TO DRONE");
+            System.err.println(R.string.drone_not_reachable);
             errorDialog.show();
         }
     }

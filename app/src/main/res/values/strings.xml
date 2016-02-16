@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">JavaDrone</string>
     <string name="title_activity_control_screen">ControlScreen</string>
+    <string name="ok">OK</string>
+    <string name="connection_error">Connection Error</string>
+    <string name="drone_not_reachable">Could not reach Drone</string>
+    <string name="emergency">Emergency</string>
+    <string name="landing">Landing</string>
+    <string name="takeoff">Take Off</string>
+    <string name="drone_not_in_reach">No Drone in reach</string>
 </resources>
