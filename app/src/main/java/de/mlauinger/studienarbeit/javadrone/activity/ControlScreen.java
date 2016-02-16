@@ -14,10 +14,10 @@ public class ControlScreen extends AppCompatActivity {
     Button landing;
     Button takeoff;
     Button emergency;
-    Button flyleft;
-    Button flyright;
-    Button flyrforward;
-    Button flyrbackward;
+    Button flyLeft;
+    Button flyRight;
+    Button flyForward;
+    Button flyBackward;
 
 
     @Override
@@ -28,20 +28,20 @@ public class ControlScreen extends AppCompatActivity {
         landing = (Button) findViewById(R.id.landing);
         takeoff = (Button) findViewById(R.id.takeoff);
         emergency = (Button) findViewById(R.id.emergency);
-        flyleft = (Button) findViewById(R.id.flyleft);
-        flyright = (Button) findViewById(R.id.flyright);
-        flyrforward = (Button) findViewById(R.id.flyforward);
-        flyrbackward = (Button) findViewById(R.id.flybackward);
+        flyLeft = (Button) findViewById(R.id.flyleft);
+        flyRight = (Button) findViewById(R.id.flyright);
+        flyForward = (Button) findViewById(R.id.flyforward);
+        flyBackward = (Button) findViewById(R.id.flybackward);
     }
 
     public void doTakeOff(View view) {
         droneController.performTakeOff();
         takeoff.setEnabled(false);
         landing.setEnabled(true);
-        flyleft.setEnabled(true);
-        flyright.setEnabled(true);
-        flyrforward.setEnabled(true);
-        flyrbackward.setEnabled(true);
+        flyLeft.setEnabled(true);
+        flyRight.setEnabled(true);
+        flyForward.setEnabled(true);
+        flyBackward.setEnabled(true);
     }
 
     public void doEmergency(View view) {
@@ -68,9 +68,9 @@ public class ControlScreen extends AppCompatActivity {
         droneController.performLanding();
         takeoff.setEnabled(true);
         landing.setEnabled(false);
-        flyleft.setEnabled(false);
-        flyright.setEnabled(false);
-        flyrforward.setEnabled(false);
-        flyrbackward.setEnabled(false);
+        flyLeft.setEnabled(false);
+        flyRight.setEnabled(false);
+        flyForward.setEnabled(false);
+        flyBackward.setEnabled(false);
     }
 }
