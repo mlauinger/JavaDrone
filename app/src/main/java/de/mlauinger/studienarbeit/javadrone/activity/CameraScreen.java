@@ -1,34 +1,44 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
+import android.app.AlertDialog;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
+import android.widget.FrameLayout;
 import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.Preview;
+
+import java.io.IOException;
 
 public class CameraScreen extends AppCompatActivity {
 
     private Preview mPreview;
-    Camera mCamera;
-    int numberOfCameras;
-    int cameraCurrentlyLocked;
-    int defaultCameraId;
+    private FrameLayout layout;
+    private FaceView faceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPreview = new Preview(this);
-        setContentView(mPreview);
+        // Hide the window title.
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        mPreview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCamera.autoFocus(null);
-            }
-        });
+        super.onCreate(savedInstanceState);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Create our Preview view and set it as the content of our activity.
+        try {
+            layout = new FrameLayout(this);
+            faceView = new FaceView(this);
+            mPreview = new Preview(this, faceView);
+            layout.addView(mPreview);
+            layout.addView(faceView);
+            setContentView(layout);
+            setContentView(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+            new AlertDialog.Builder(this).setMessage(e.getMessage()).create().show();
+        }
     }
 
     @Override
@@ -51,28 +61,5 @@ public class CameraScreen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Because the Camera object is a shared resource, it's very
-        // important to release it when the activity is paused.
-        if (mCamera != null) {
-            mPreview.setCamera(null);
-            mCamera.release();
-            mCamera = null;
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Open the default i.e. the first rear facing camera.
-        mCamera = Camera.open();
-        cameraCurrentlyLocked = defaultCameraId;
-        mPreview.setCamera(mCamera);
     }
 }
