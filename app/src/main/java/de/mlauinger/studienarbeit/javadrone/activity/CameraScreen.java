@@ -1,17 +1,34 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
+import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import de.mlauinger.studienarbeit.javadrone.R;
+import de.mlauinger.studienarbeit.javadrone.controller.Preview;
 
 public class CameraScreen extends AppCompatActivity {
+
+    private Preview mPreview;
+    Camera mCamera;
+    int numberOfCameras;
+    int cameraCurrentlyLocked;
+    int defaultCameraId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_screen);
+        mPreview = new Preview(this);
+        setContentView(mPreview);
+
+        mPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCamera.autoFocus(null);
+            }
+        });
     }
 
     @Override
@@ -34,5 +51,28 @@ public class CameraScreen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Because the Camera object is a shared resource, it's very
+        // important to release it when the activity is paused.
+        if (mCamera != null) {
+            mPreview.setCamera(null);
+            mCamera.release();
+            mCamera = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Open the default i.e. the first rear facing camera.
+        mCamera = Camera.open();
+        cameraCurrentlyLocked = defaultCameraId;
+        mPreview.setCamera(mCamera);
     }
 }

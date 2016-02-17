@@ -52,7 +52,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private void processToControl() {
-        Intent startControls = new Intent(this, ControlScreen.class);
+        Intent startControls = new Intent(this, CameraScreen.class);
         startActivity(startControls);
     }
 

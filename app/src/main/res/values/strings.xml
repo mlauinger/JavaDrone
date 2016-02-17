@@ -8,4 +8,8 @@
     <string name="landing">Landing</string>
     <string name="takeoff">Take Off</string>
     <string name="drone_not_in_reach">No Drone in reach</string>
+    <string name="title_activity_camera_screen">CameraScreen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

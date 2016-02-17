@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     repositories {
         maven { url 'http://repo1.maven.org/maven2' }
+        mavenCentral()
     }
 
     defaultConfig {
@@ -28,4 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
+    compile 'org.bytedeco:javacv:1.1'
 }
