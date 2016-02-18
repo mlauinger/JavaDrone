@@ -56,6 +56,11 @@ public class StartScreen extends AppCompatActivity {
         startActivity(startControls);
     }
 
+    public void openSettings(View view) {
+        Intent openSettings = new Intent(this, SettingsActivity.class);
+        startActivity(openSettings);
+    }
+
     private class DroneConnector extends AsyncTask<ARDrone, Boolean, Boolean> {
 
         @Override
