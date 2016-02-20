@@ -23,7 +23,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
     private static final int MIN = 0;
     private static final int INTERVAL = 5;
 
-    public static int mCurrentValue;
+    public int mCurrentValue;
     private SeekBar mSeekBar;
 
     private TextView mStatusText;
@@ -45,14 +45,12 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent){
-        RelativeLayout layout =  null;
+    protected View onCreateView(ViewGroup parent) {
+        RelativeLayout layout = null;
         try {
             LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = (RelativeLayout)mInflater.inflate(R.layout.slider_preference, parent, false);
-        }
-        catch(Exception e)
-        {
+            layout = (RelativeLayout) mInflater.inflate(R.layout.slider_preference, parent, false);
+        } catch (Exception e) {
             Log.e(TAG, "Error creating seek bar preference", e);
         }
         return layout;
@@ -61,8 +59,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
-        try
-        {
+        try {
             ViewParent oldContainer = mSeekBar.getParent();
             ViewGroup newContainer = (ViewGroup) view.findViewById(R.id.seekBarPrefBarContainer);
             if (oldContainer != newContainer) {
@@ -73,8 +70,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
                 newContainer.addView(mSeekBar, ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             Log.e(TAG, "Error binding view: " + ex.toString());
         }
         updateView(view);
@@ -82,13 +78,13 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
 
     protected void updateView(View view) {
         try {
-            RelativeLayout layout = (RelativeLayout)view;
-            mStatusText = (TextView)layout.findViewById(R.id.seekBarPrefValue);
-            mStatusText.setText(String.valueOf(mCurrentValue));
+            RelativeLayout layout = (RelativeLayout) view;
+            mStatusText = (TextView) layout.findViewById(R.id.seekBarPrefValue);
+            Float showedValue = mCurrentValue * 0.01f;
+            mStatusText.setText(String.valueOf(showedValue));
             mStatusText.setMinimumWidth(30);
             mSeekBar.setProgress(mCurrentValue);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Error updating seek bar preference", e);
         }
 
@@ -98,23 +94,25 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         int newValue = progress;
         int mMaxValue = 100;
-        if(newValue > mMaxValue)
+        if (newValue > mMaxValue)
             newValue = mMaxValue;
-        else if(newValue < MIN)
+        else if (newValue < MIN)
             newValue = MIN;
-        else if(newValue % INTERVAL != 0)
-            newValue = Math.round(((float)newValue)/INTERVAL)*INTERVAL;
-        if(!callChangeListener(newValue)){
+        else if (newValue % INTERVAL != 0)
+            newValue = Math.round(((float) newValue) / INTERVAL) * INTERVAL;
+        if (!callChangeListener(newValue)) {
             seekBar.setProgress(mCurrentValue);
             return;
         }
         mCurrentValue = newValue;
-        mStatusText.setText(String.valueOf(newValue));
+        Float showedValue = mCurrentValue * 0.01f;
+        mStatusText.setText(String.valueOf(showedValue));
         persistInt(newValue);
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
@@ -122,22 +120,20 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
     }
 
     @Override
-    protected Object onGetDefaultValue(TypedArray ta, int index){
+    protected Object onGetDefaultValue(TypedArray ta, int index) {
         return ta.getInt(index, DEFAULT_VALUE);
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
 
-        if(restoreValue) {
+        if (restoreValue) {
             mCurrentValue = getPersistedInt(mCurrentValue);
-        }
-        else {
+        } else {
             int temp = 0;
             try {
-                temp = (Integer)defaultValue;
-            }
-            catch(Exception ex) {
+                temp = (Integer) defaultValue;
+            } catch (Exception ex) {
                 Log.e(TAG, "Invalid default value: " + defaultValue.toString());
             }
 
