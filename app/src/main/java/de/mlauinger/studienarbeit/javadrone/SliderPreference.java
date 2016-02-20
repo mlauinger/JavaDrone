@@ -14,6 +14,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class SliderPreference extends Preference implements OnSeekBarChangeListener {
 
     private final String TAG = getClass().getName();
@@ -80,8 +82,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
         try {
             RelativeLayout layout = (RelativeLayout) view;
             mStatusText = (TextView) layout.findViewById(R.id.seekBarPrefValue);
-            Float showedValue = mCurrentValue * 0.01f;
-            mStatusText.setText(String.valueOf(showedValue));
+            mStatusText.setText(formatForView(mCurrentValue));
             mStatusText.setMinimumWidth(30);
             mSeekBar.setProgress(mCurrentValue);
         } catch (Exception e) {
@@ -105,8 +106,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
             return;
         }
         mCurrentValue = newValue;
-        Float showedValue = mCurrentValue * 0.01f;
-        mStatusText.setText(String.valueOf(showedValue));
+        mStatusText.setText(formatForView(newValue));
         persistInt(newValue);
     }
 
@@ -140,6 +140,11 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
             persistInt(temp);
             mCurrentValue = temp;
         }
+    }
+
+    private String formatForView(int input) {
+        DecimalFormat formatter = new DecimalFormat("###.##");
+        return formatter.format(input * 0.01f);
     }
 
 }
