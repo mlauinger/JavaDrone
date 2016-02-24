@@ -30,16 +30,4 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
 
-    <de.mlauinger.studienarbeit.javadrone.SliderPreference
-        android:key="vertical"
-        android:title="Vertical"
-        android:summary="set the vertical Speed"
-        />
-
-    <de.mlauinger.studienarbeit.javadrone.SliderPreference
-        android:key="horizontal"
-        android:title="horizontal"
-        android:summary="set the horizontal Speed"
-        />
-
 </PreferenceScreen>

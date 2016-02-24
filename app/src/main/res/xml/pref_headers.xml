@@ -15,4 +15,8 @@
         android:fragment="de.mlauinger.studienarbeit.javadrone.activity.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" android:icon="@drawable/ic_sync_black_24dp" />
 
+    <header
+        android:fragment="de.mlauinger.studienarbeit.javadrone.activity.SettingsActivity$DronePreferenceFragment"
+        android:title="DroneSettings" android:icon="@drawable/ic_lock_airplane_mode_alpha" />
+
 </preference-headers>
