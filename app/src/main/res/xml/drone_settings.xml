@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drone="http://schemas.android.com/apk/res-auto">
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="3"
+        android:key="maximal_altitude"
+        android:summary="Set the maximal altitude the drone will reach"
+        android:title="Max. Altitude"
+        android:persistent="true"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="5"
+        drone:msbp_measurementUnit="m"
+        drone:msbp_minValue="3" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="5"
+        android:key="tilt"
+        android:summary="Sets the tilt of the drone while accelerating"
+        android:title="Tilt"
+        android:persistent="true"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="50"
+        drone:msbp_measurementUnit="°"
+        drone:msbp_minValue="5" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="5"
+        android:key="vertical_speed"
+        android:summary="Sets the vertical speed of the drone"
+        android:title="Vertical Speed"
+        android:persistent="true"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="300"
+        drone:msbp_measurementUnit="0.01m/s"
+        drone:msbp_minValue="0" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="5"
+        android:key="rotation_speed"
+        android:summary="Sets the rotation speed (yaw) of the drone"
+        android:title="Rotation Speed"
+        android:persistent="true"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="350"
+        drone:msbp_measurementUnit="°/s"
+        drone:msbp_minValue="40" />
+
+</PreferenceScreen>
