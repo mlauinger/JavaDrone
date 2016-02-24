@@ -1,5 +1,6 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.Button;
 
 import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
+import de.mlauinger.studienarbeit.javadrone.dialogs.CustomErrorDialog;
+import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
 
 public class ControlScreen extends AppCompatActivity {
 
@@ -72,5 +75,10 @@ public class ControlScreen extends AppCompatActivity {
         flyRight.setEnabled(false);
         flyForward.setEnabled(false);
         flyBackward.setEnabled(false);
+    }
+
+    public void showDroneConfiguration(View view) {
+        Dialog droneConfigurations = new CustomNotification().showNotification(this, "Drone Configuration", droneController.getConfiguration());
+        droneConfigurations.show();
     }
 }

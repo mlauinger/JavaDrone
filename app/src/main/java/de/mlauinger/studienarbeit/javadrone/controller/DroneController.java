@@ -55,4 +55,8 @@ public class DroneController {
             }
         }
     }
+
+    public String getConfiguration() {
+        return drone.readDroneConfiguration();
+    }
 }
