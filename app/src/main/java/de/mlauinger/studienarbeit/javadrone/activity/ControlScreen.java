@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import de.mlauinger.studienarbeit.javadrone.R;
+import de.mlauinger.studienarbeit.javadrone.controller.DroneConfigurationController;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 
 public class ControlScreen extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class ControlScreen extends AppCompatActivity {
     Button flyRight;
     Button flyForward;
     Button flyBackward;
+    DroneConfigurationController configController = new DroneConfigurationController(this);
 
 
     @Override
@@ -25,6 +27,12 @@ public class ControlScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
         droneController = new DroneController();
+        droneController.sendConfigurations(configController);
+        initializeViewElements();
+
+    }
+
+    private void initializeViewElements() {
         landing = (Button) findViewById(R.id.landing);
         takeoff = (Button) findViewById(R.id.takeoff);
         emergency = (Button) findViewById(R.id.emergency);
