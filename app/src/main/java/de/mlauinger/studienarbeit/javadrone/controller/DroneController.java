@@ -10,6 +10,10 @@ public class DroneController {
 
     private static ARDrone drone;
 
+    public void sendConfigurations(DroneConfigurationController configController) {
+        configController.sendAllPreferencesToDrone(drone);
+    }
+
     public void setDrone(ARDrone arDrone) {
         drone = arDrone;
     }
