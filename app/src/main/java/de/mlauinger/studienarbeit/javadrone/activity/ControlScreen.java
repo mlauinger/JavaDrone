@@ -1,18 +1,23 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.codeminders.ardrone.DroneVideoListener;
 
 import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneConfigurationController;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
-import de.mlauinger.studienarbeit.javadrone.dialogs.CustomErrorDialog;
 import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
 
-public class ControlScreen extends AppCompatActivity {
+public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
 
     DroneController droneController;
     Button landing;
@@ -22,6 +27,7 @@ public class ControlScreen extends AppCompatActivity {
     Button flyRight;
     Button flyForward;
     Button flyBackward;
+    ImageView droneStream;
     DroneConfigurationController configController = new DroneConfigurationController(this);
 
 
@@ -43,6 +49,7 @@ public class ControlScreen extends AppCompatActivity {
         flyRight = (Button) findViewById(R.id.flyright);
         flyForward = (Button) findViewById(R.id.flyforward);
         flyBackward = (Button) findViewById(R.id.flybackward);
+        droneStream = (ImageView) findViewById(R.id.droneVideoStream);
     }
 
     public void doTakeOff(View view) {
@@ -88,5 +95,45 @@ public class ControlScreen extends AppCompatActivity {
     public void showDroneConfiguration(View view) {
         Dialog droneConfigurations = new CustomNotification().showNotification(this, "Drone Configuration", droneController.getConfiguration());
         droneConfigurations.show();
+    }
+
+    @Override
+    public void frameReceived(int startX, int startY, int w, int h,
+                              int[] rgbArray, int offset, int scansize) {
+        (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
+    }
+
+    private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {
+
+        public Bitmap b;
+        public int[] rgbArray;
+        public int offset;
+        public int scansize;
+        public int w;
+        public int h;
+
+        public VideoDisplayer(int x, int y, int width, int height, int[] arr, int off, int scan) {
+            super();
+            rgbArray = arr;
+            offset = off;
+            scansize = scan;
+            w = width;
+            h = height;
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            b = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
+            b.setDensity(100);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void param) {
+            ;
+            ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+            droneStream.setImageBitmap(b);
+        }
     }
 }
