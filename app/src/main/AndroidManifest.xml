@@ -23,8 +23,13 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:name=".activity.SettingsScreen"
+            android:label="@string/title_activity_settings_test"
+            android:parentActivityName=".activity.StartScreen"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.mlauinger.studienarbeit.javadrone.activity.StartScreen" />
         </activity>
     </application>
 
