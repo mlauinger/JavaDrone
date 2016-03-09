@@ -2,12 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:drone="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory
+        android:title="Drone Settings"
+        >
+
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="3"
         android:key="maximal_altitude"
+        android:persistent="true"
         android:summary="Set the maximal altitude the drone will reach"
         android:title="Max. Altitude"
-        android:persistent="true"
         drone:msbp_interval="1"
         drone:msbp_maxValue="5"
         drone:msbp_measurementUnit="m"
@@ -16,9 +20,9 @@
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="5"
         android:key="tilt"
+        android:persistent="true"
         android:summary="Sets the tilt of the drone while accelerating"
         android:title="Tilt"
-        android:persistent="true"
         drone:msbp_interval="1"
         drone:msbp_maxValue="50"
         drone:msbp_measurementUnit="°"
@@ -27,9 +31,9 @@
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="5"
         android:key="vertical_speed"
+        android:persistent="true"
         android:summary="Sets the vertical speed of the drone"
         android:title="Vertical Speed"
-        android:persistent="true"
         drone:msbp_interval="1"
         drone:msbp_maxValue="300"
         drone:msbp_measurementUnit=" *0.01m/s"
@@ -38,12 +42,54 @@
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="5"
         android:key="rotation_speed"
+        android:persistent="true"
         android:summary="Sets the rotation speed (yaw) of the drone"
         android:title="Rotation Speed"
-        android:persistent="true"
         drone:msbp_interval="1"
         drone:msbp_maxValue="350"
         drone:msbp_measurementUnit="°/s"
         drone:msbp_minValue="40" />
 
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Image Recognition">
+
+        <CheckBoxPreference
+            android:title="Show alternative image"
+            android:key="alt_image"
+            android:defaultValue="false"
+            android:persistent="true"
+            />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="0"
+        android:key="red_value"
+        android:persistent="true"
+        android:summary="Sets the red Value for Image detection"
+        android:title="Red Value"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="255"
+        drone:msbp_minValue="0" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="0"
+        android:key="green_value"
+        android:persistent="true"
+        android:summary="Sets the green Value for Image detection"
+        android:title="Green Value"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="255"
+        drone:msbp_minValue="0" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="0"
+        android:key="blue_value"
+        android:persistent="true"
+        android:summary="Sets the blue Value for Image detection"
+        android:title="Blue Value"
+        drone:msbp_interval="1"
+        drone:msbp_maxValue="255"
+        drone:msbp_minValue="0" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
