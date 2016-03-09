@@ -32,7 +32,7 @@
         android:persistent="true"
         drone:msbp_interval="1"
         drone:msbp_maxValue="300"
-        drone:msbp_measurementUnit="0.01m/s"
+        drone:msbp_measurementUnit=" *0.01m/s"
         drone:msbp_minValue="0" />
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
