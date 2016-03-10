@@ -16,6 +16,11 @@ import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneConfigurationController;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
+import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
+import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_imgproc;
+
+import static org.bytedeco.javacpp.opencv_core.*;
 
 public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
 
@@ -29,6 +34,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     Button flyBackward;
     ImageView droneStream;
     DroneConfigurationController configController = new DroneConfigurationController(this);
+    Runner runner;
 
 
     @Override
@@ -38,7 +44,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController = new DroneController();
         droneController.sendConfigurations(configController);
         initializeViewElements();
-
+        runner = new Runner(this);
     }
 
     private void initializeViewElements() {
@@ -140,7 +146,21 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         @Override
         protected void onPostExecute(Void param) {
             ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
-            droneStream.setImageBitmap(b);
+
+            int imageWidth = 640;
+            int imageHeight  = 480;
+            opencv_core.IplImage yuvimage = opencv_core.IplImage.create(imageWidth, imageHeight * 3 / 2, IPL_DEPTH_8U, 2);
+            yuvimage.getByteBuffer().put(b.getNinePatchChunk());
+
+            opencv_core.IplImage rgbimage = opencv_core.IplImage.create(imageWidth, imageHeight, IPL_DEPTH_8U, 3);
+            opencv_imgproc.cvCvtColor(yuvimage, rgbimage, opencv_imgproc.CV_YUV2BGR_NV21);
+
+            opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
+
+            Bitmap bitmap = Bitmap.createBitmap(imageWidth, imageHeight,Bitmap.Config.RGB_565);
+            bitmap.copyPixelsFromBuffer(image.getByteBuffer());
+
+            droneStream.setImageBitmap(bitmap);
         }
     }
 }
