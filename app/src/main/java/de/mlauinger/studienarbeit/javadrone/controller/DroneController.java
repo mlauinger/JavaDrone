@@ -63,4 +63,14 @@ public class DroneController {
     public String getConfiguration() {
         return drone.readDroneConfiguration();
     }
+
+    public void turnDrone(float left_right) {
+        if (null != drone) {
+            try {
+                drone.move(0, 0, 0, left_right);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

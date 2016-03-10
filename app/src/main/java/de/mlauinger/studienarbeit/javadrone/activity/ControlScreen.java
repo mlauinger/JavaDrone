@@ -82,6 +82,14 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.flyDrone(0, 0.1f);
     }
 
+    public void turnLeft(View view) {
+        droneController.turnDrone(-0.1f);
+    }
+
+    public void turnRight(View view) {
+        droneController.turnDrone(0.1f);
+    }
+
     public void doLanding(View view) {
         droneController.performLanding();
         takeoff.setEnabled(true);
@@ -131,7 +139,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
         @Override
         protected void onPostExecute(Void param) {
-            ;
             ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
             droneStream.setImageBitmap(b);
         }

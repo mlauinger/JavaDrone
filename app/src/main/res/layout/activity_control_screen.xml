@@ -70,6 +70,30 @@
         android:text="D" />
 
     <Button
+        android:id="@+id/turnleft"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flyleft"
+        android:layout_toStartOf="@+id/flyforward"
+        android:layout_toLeftOf="@id/flyforward"
+        android:enabled="false"
+        android:onClick="turnLeft"
+        android:text="i-" />
+
+    <Button
+        android:id="@+id/turnright"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flyright"
+        android:layout_toEndOf="@+id/flyforward"
+        android:layout_toRightOf="@id/flyforward"
+        android:enabled="false"
+        android:onClick="turnRight"
+        android:text="i-" />
+
+    <Button
         android:id="@+id/landing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
