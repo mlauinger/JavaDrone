@@ -17,6 +17,7 @@ import de.mlauinger.studienarbeit.javadrone.controller.DroneConfigurationControl
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
 import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
+
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_imgproc;
 
@@ -130,7 +131,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
     private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {
 
-
         public Bitmap b;
         public int[] rgbArray;
         public int offset;
@@ -157,9 +157,20 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
         @Override
         protected void onPostExecute(Void param) {
+            ;
             ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+           /* int imageWidth = 640;
+            int imageHeight  = 480;
+            opencv_core.IplImage yuvimage = opencv_core.IplImage.create(imageWidth, imageHeight * 3 / 2, IPL_DEPTH_8U, 2);
+            yuvimage.getByteBuffer().put(b.getNinePatchChunk());
 
+            opencv_core.IplImage rgbimage = opencv_core.IplImage.create(imageWidth, imageHeight, IPL_DEPTH_8U, 3);
+            opencv_imgproc.cvCvtColor(yuvimage, rgbimage, opencv_imgproc.CV_YUV2BGR_NV21);
 
+            opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
+
+            Bitmap bitmap = Bitmap.createBitmap(imageWidth, imageHeight,Bitmap.Config.RGB_565);
+            bitmap.copyPixelsFromBuffer(image.getByteBuffer());*/
             droneStream.setImageBitmap(b);
         }
     }
