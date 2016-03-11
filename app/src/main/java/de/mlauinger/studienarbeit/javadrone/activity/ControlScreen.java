@@ -32,6 +32,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     Button flyRight;
     Button flyForward;
     Button flyBackward;
+    Button turnLeft;
+    Button turnRight;
     ImageView droneStream;
     DroneConfigurationController configController = new DroneConfigurationController(this);
     Runner runner;
@@ -55,6 +57,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         flyRight = (Button) findViewById(R.id.flyright);
         flyForward = (Button) findViewById(R.id.flyforward);
         flyBackward = (Button) findViewById(R.id.flybackward);
+        turnLeft = (Button) findViewById(R.id.turnleft);
+        turnRight = (Button) findViewById(R.id.turnright);
         droneStream = (ImageView) findViewById(R.id.droneVideoStream);
     }
 
@@ -66,6 +70,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         flyRight.setEnabled(true);
         flyForward.setEnabled(true);
         flyBackward.setEnabled(true);
+        turnLeft.setEnabled(true);
+        turnRight.setEnabled(true);
     }
 
     public void doEmergency(View view) {
@@ -73,27 +79,28 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void flyForward(View view) {
-        droneController.flyDrone(0.1f, 0);
+        droneController.flyDrone(-1f, 0);
     }
 
     public void flyBackward(View view) {
-        droneController.flyDrone(-0.1f, 0);
+        droneController.flyDrone(1f, 0);
     }
 
     public void flyLeft(View view) {
-        droneController.flyDrone(0, 0.1f);
+        droneController.flyDrone(0, -1f);
     }
 
     public void flyRight(View view) {
-        droneController.flyDrone(0, 0.1f);
+        droneController.flyDrone(0, 1f);
     }
 
+
     public void turnLeft(View view) {
-        droneController.turnDrone(-0.1f);
+        droneController.turnDrone(-1f);
     }
 
     public void turnRight(View view) {
-        droneController.turnDrone(0.1f);
+        droneController.turnDrone(1f);
     }
 
     public void doLanding(View view) {
@@ -104,9 +111,12 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         flyRight.setEnabled(false);
         flyForward.setEnabled(false);
         flyBackward.setEnabled(false);
+        turnLeft.setEnabled(false);
+        turnRight.setEnabled(false);
     }
 
     public void showDroneConfiguration(View view) {
+        System.out.println(droneController.getConfiguration());
         Dialog droneConfigurations = new CustomNotification().showNotification(this, "Drone Configuration", droneController.getConfiguration());
         droneConfigurations.show();
     }
@@ -114,10 +124,12 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     @Override
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
+        System.out.println("Im here");
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
     }
 
     private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {
+
 
         public Bitmap b;
         public int[] rgbArray;
@@ -147,20 +159,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         protected void onPostExecute(Void param) {
             ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
 
-            int imageWidth = 640;
-            int imageHeight  = 480;
-            opencv_core.IplImage yuvimage = opencv_core.IplImage.create(imageWidth, imageHeight * 3 / 2, IPL_DEPTH_8U, 2);
-            yuvimage.getByteBuffer().put(b.getNinePatchChunk());
 
-            opencv_core.IplImage rgbimage = opencv_core.IplImage.create(imageWidth, imageHeight, IPL_DEPTH_8U, 3);
-            opencv_imgproc.cvCvtColor(yuvimage, rgbimage, opencv_imgproc.CV_YUV2BGR_NV21);
-
-            opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
-
-            Bitmap bitmap = Bitmap.createBitmap(imageWidth, imageHeight,Bitmap.Config.RGB_565);
-            bitmap.copyPixelsFromBuffer(image.getByteBuffer());
-
-            droneStream.setImageBitmap(bitmap);
+            droneStream.setImageBitmap(b);
         }
     }
 }
