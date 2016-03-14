@@ -37,7 +37,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     Button turnLeft;
     Button turnRight;
     ImageView droneStream;
-    DroneConfigurationController configController = new DroneConfigurationController(this);
+    DroneConfigurationController configController;
     Runner runner;
 
 
@@ -46,6 +46,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
         droneController = new DroneController();
+        configController = new DroneConfigurationController(this);
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
