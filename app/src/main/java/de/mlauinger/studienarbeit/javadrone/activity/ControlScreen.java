@@ -56,13 +56,9 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
-<<<<<<< HEAD
         converterToBitmap = new AndroidFrameConverter();
         converterToIplImage = new OpenCVFrameConverter.ToIplImage();
-
-=======
         DroneController.addImageListender(this);
->>>>>>> b753fc650e4015ed1e45da88bba8aab47622753d
     }
 
     private void initializeViewElements() {
