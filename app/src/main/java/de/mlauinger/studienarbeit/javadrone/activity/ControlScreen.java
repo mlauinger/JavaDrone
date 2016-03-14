@@ -21,6 +21,9 @@ import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
 
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_imgproc;
+import org.bytedeco.javacv.AndroidFrameConverter;
+import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 
 import static org.bytedeco.javacpp.opencv_core.*;
 
@@ -39,6 +42,9 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     ImageView droneStream;
     DroneConfigurationController configController;
     Runner runner;
+    AndroidFrameConverter converterToBitmap;
+    OpenCVFrameConverter.ToIplImage converterToIplImage;
+    Frame frame;
 
 
     @Override
@@ -50,7 +56,13 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
+<<<<<<< HEAD
+        converterToBitmap = new AndroidFrameConverter();
+        converterToIplImage = new OpenCVFrameConverter.ToIplImage();
+
+=======
         DroneController.addImageListender(this);
+>>>>>>> b753fc650e4015ed1e45da88bba8aab47622753d
     }
 
     private void initializeViewElements() {
@@ -159,24 +171,14 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
         @Override
         protected void onPostExecute(Void param) {
-            Drawable viewContent = droneStream.getDrawable();
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) viewContent;
-            Bitmap bitmap2 = bitmapDrawable.getBitmap();
-            bitmap2.recycle();
-            //((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
-            /*int imageWidth = 640;
-            int imageHeight  = 480;
-            opencv_core.IplImage yuvimage = opencv_core.IplImage.create(imageWidth, imageHeight * 3 / 2, IPL_DEPTH_8U, 2);
-            yuvimage.getByteBuffer().put(b.getNinePatchChunk());
 
-            opencv_core.IplImage rgbimage = opencv_core.IplImage.create(imageWidth, imageHeight, IPL_DEPTH_8U, 3);
-            opencv_imgproc.cvCvtColor(yuvimage, rgbimage, opencv_imgproc.CV_YUV2BGR_NV21);
+            ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+            frame = converterToBitmap.convert(b);
+            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame),droneController);
 
-            //opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
-
-            Bitmap bitmap = Bitmap.createBitmap(imageWidth, imageHeight,Bitmap.Config.RGB_565);
-            bitmap.copyPixelsFromBuffer(rgbimage.getByteBuffer());*/
-            droneStream.setImageBitmap(b);
+            frame = converterToIplImage.convert(image);
+            Bitmap bitmap = converterToBitmap.convert(frame);
+            droneStream.setImageBitmap(bitmap);
         }
     }
 }
