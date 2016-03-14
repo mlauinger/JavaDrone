@@ -1,10 +1,12 @@
 package de.mlauinger.studienarbeit.javadrone.controller;
 
 import com.codeminders.ardrone.ARDrone;
+import com.codeminders.ardrone.DroneVideoListener;
 
 import java.io.IOException;
 
 import de.mlauinger.studienarbeit.javadrone.R;
+import de.mlauinger.studienarbeit.javadrone.activity.ControlScreen;
 
 public class DroneController {
 
@@ -72,5 +74,9 @@ public class DroneController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void addImageListender(DroneVideoListener videoScreen) {
+        drone.addImageListener(videoScreen);
     }
 }

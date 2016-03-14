@@ -3,6 +3,7 @@ package de.mlauinger.studienarbeit.javadrone.activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -54,9 +55,13 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
+<<<<<<< HEAD
         converterToBitmap = new AndroidFrameConverter();
         converterToIplImage = new OpenCVFrameConverter.ToIplImage();
 
+=======
+        DroneController.addImageListender(this);
+>>>>>>> b753fc650e4015ed1e45da88bba8aab47622753d
     }
 
     private void initializeViewElements() {
@@ -134,7 +139,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     @Override
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
-        System.out.println("Im here");
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
     }
 
