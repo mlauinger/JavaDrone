@@ -3,6 +3,7 @@ package de.mlauinger.studienarbeit.javadrone.activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
+        DroneController.addImageListender(this);
     }
 
     private void initializeViewElements() {
@@ -125,7 +127,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     @Override
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
-        System.out.println("Im here");
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
     }
 
@@ -157,9 +158,12 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
         @Override
         protected void onPostExecute(Void param) {
-            ;
-            ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
-           /* int imageWidth = 640;
+            Drawable viewContent = droneStream.getDrawable();
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) viewContent;
+            Bitmap bitmap2 = bitmapDrawable.getBitmap();
+            bitmap2.recycle();
+            //((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+            /*int imageWidth = 640;
             int imageHeight  = 480;
             opencv_core.IplImage yuvimage = opencv_core.IplImage.create(imageWidth, imageHeight * 3 / 2, IPL_DEPTH_8U, 2);
             yuvimage.getByteBuffer().put(b.getNinePatchChunk());
@@ -167,10 +171,10 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
             opencv_core.IplImage rgbimage = opencv_core.IplImage.create(imageWidth, imageHeight, IPL_DEPTH_8U, 3);
             opencv_imgproc.cvCvtColor(yuvimage, rgbimage, opencv_imgproc.CV_YUV2BGR_NV21);
 
-            opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
+            //opencv_core.IplImage image = runner.findCircle(rgbimage,droneController);
 
             Bitmap bitmap = Bitmap.createBitmap(imageWidth, imageHeight,Bitmap.Config.RGB_565);
-            bitmap.copyPixelsFromBuffer(image.getByteBuffer());*/
+            bitmap.copyPixelsFromBuffer(rgbimage.getByteBuffer());*/
             droneStream.setImageBitmap(b);
         }
     }

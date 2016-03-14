@@ -71,6 +71,7 @@ public class StartScreen extends AppCompatActivity {
                 drone.waitForReady(3000);
                 drone.playLED(1, 10, 4);
                 drone.clearEmergencySignal();
+                drone.selectVideoChannel(ARDrone.VideoChannel.HORIZONTAL_ONLY);
                 droneCon.setDrone(drone);
                 return true;
             } catch (IOException e) {
