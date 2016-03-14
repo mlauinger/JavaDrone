@@ -45,6 +45,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     AndroidFrameConverter converterToBitmap;
     OpenCVFrameConverter.ToIplImage converterToIplImage;
     Frame frame;
+    int count = 0;
 
 
     @Override
@@ -55,13 +56,9 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneController.sendConfigurations(configController);
         initializeViewElements();
         runner = new Runner(this);
-<<<<<<< HEAD
         converterToBitmap = new AndroidFrameConverter();
         converterToIplImage = new OpenCVFrameConverter.ToIplImage();
-
-=======
         DroneController.addImageListender(this);
->>>>>>> b753fc650e4015ed1e45da88bba8aab47622753d
     }
 
     private void initializeViewElements() {
@@ -163,21 +160,22 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
         @Override
         protected Void doInBackground(Void... params) {
-            b = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
+            Bitmap bitmap = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
+            bitmap.setDensity(100);
+            frame = converterToBitmap.convert(bitmap);
+            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame), droneController);
+            frame = converterToIplImage.convert(image);
+            bitmap = converterToBitmap.convert(frame);
+            b = bitmap;
             b.setDensity(100);
+            count++;
             return null;
         }
 
         @Override
         protected void onPostExecute(Void param) {
-
-            ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
-            frame = converterToBitmap.convert(b);
-            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame),droneController);
-
-            frame = converterToIplImage.convert(image);
-            Bitmap bitmap = converterToBitmap.convert(frame);
-            droneStream.setImageBitmap(bitmap);
+            //((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+            droneStream.setImageBitmap(b);
         }
     }
 }
