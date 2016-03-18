@@ -61,6 +61,11 @@ public class StartScreen extends AppCompatActivity {
         startActivity(openSettings);
     }
 
+    public void openSecondScreen(View view) {
+        Intent openSecondScreen = new Intent(this, ControlSettings.class);
+        startActivity(openSecondScreen);
+    }
+
     private class DroneConnector extends AsyncTask<ARDrone, Boolean, Boolean> {
 
         @Override
