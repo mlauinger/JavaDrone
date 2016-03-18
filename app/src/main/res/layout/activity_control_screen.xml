@@ -10,6 +10,18 @@
     tools:context=".ControlScreen">
 
 
+    <ImageView
+        android:id="@+id/droneVideoStream"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="Camera signal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_lock_airplane_mode"
+        android:layout_alignBottom="@+id/show_config"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <Button
         android:id="@+id/takeoff"
         android:layout_width="wrap_content"
@@ -121,17 +133,20 @@
         android:layout_height="wrap_content"
         android:text="@string/show_config"
         android:id="@+id/show_config"
+        android:onClick="showDroneConfiguration"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="showDroneConfiguration" />
+        android:layout_alignRight="@+id/droneVideoStream"
+        android:layout_alignEnd="@+id/droneVideoStream" />
 
-    <ImageView
-        android:id="@+id/droneVideoStream"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:adjustViewBounds="true"
-        android:contentDescription="Camera signal"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_lock_airplane_mode" />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="switch view"
+        android:id="@+id/switch_view"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="switchToAutomatic"/>
 
 </RelativeLayout>

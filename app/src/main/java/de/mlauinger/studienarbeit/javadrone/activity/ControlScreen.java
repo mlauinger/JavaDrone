@@ -1,6 +1,7 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -137,6 +138,11 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
+    }
+
+    public void switchToAutomatic(View view) {
+        Intent automaticControl = new Intent(this, ControlSettings.class);
+        startActivity(automaticControl);
     }
 
     private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {

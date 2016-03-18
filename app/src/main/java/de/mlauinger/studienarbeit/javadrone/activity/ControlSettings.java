@@ -2,6 +2,7 @@ package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,10 +25,12 @@ public class ControlSettings extends AppCompatActivity {
     }
 
     public void switchScreen(View view) {
+        Intent manualControl = new Intent(this, ControlScreen.class);
+        startActivity(manualControl);
     }
 
     public void showSettings(View view) {
-        if(settingsContainer.isShown()) {
+        if (settingsContainer.isShown()) {
             settingsContainer.setVisibility(View.INVISIBLE);
             return;
         }
