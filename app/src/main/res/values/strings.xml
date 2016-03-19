@@ -73,4 +73,6 @@
     <string name="title_activity_control_settings">ControlSettings</string>
     <string name="switch_to_manual">Switch to manual</string>
     <string name="show_settings">show Settings</string>
+    <string name="automatic">Automatic</string>
+    <string name="camera_sigal">Camera signal</string>
 </resources>

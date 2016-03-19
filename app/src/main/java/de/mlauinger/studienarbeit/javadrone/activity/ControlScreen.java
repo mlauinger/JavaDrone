@@ -42,10 +42,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     Button turnRight;
     ImageView droneStream;
     DroneConfigurationController configController;
-    Runner runner;
-    AndroidFrameConverter converterToBitmap;
-    OpenCVFrameConverter.ToIplImage converterToIplImage;
-    Frame frame;
 
 
     @Override
@@ -56,9 +52,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         configController = new DroneConfigurationController(this);
         droneController.sendConfigurations(configController);
         initializeViewElements();
-        runner = new Runner(this);
-        converterToBitmap = new AndroidFrameConverter();
-        converterToIplImage = new OpenCVFrameConverter.ToIplImage();
         DroneController.addImageListender(this);
     }
 
@@ -73,6 +66,11 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         turnLeft = (Button) findViewById(R.id.turnleft);
         turnRight = (Button) findViewById(R.id.turnright);
         droneStream = (ImageView) findViewById(R.id.droneVideoStream);
+    }
+
+    public void switchToAutomatic(View view) {
+        Intent automaticControl = new Intent(this, ControlSettings.class);
+        startActivity(automaticControl);
     }
 
     public void doTakeOff(View view) {
@@ -140,11 +138,6 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
     }
 
-    public void switchToAutomatic(View view) {
-        Intent automaticControl = new Intent(this, ControlSettings.class);
-        startActivity(automaticControl);
-    }
-
     private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {
 
         public Bitmap b;
@@ -175,12 +168,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         protected void onPostExecute(Void param) {
 
             ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
-            frame = converterToBitmap.convert(b);
-            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame),droneController);
-
-            frame = converterToIplImage.convert(image);
-            Bitmap bitmap = converterToBitmap.convert(frame);
-            droneStream.setImageBitmap(bitmap);
+            droneStream.setImageBitmap(b);
         }
     }
 }
