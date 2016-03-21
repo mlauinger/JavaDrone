@@ -17,7 +17,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="Camera signal"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_lock_airplane_mode"
+        android:src="@drawable/drohne_video"
         android:layout_alignBottom="@+id/show_config"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
