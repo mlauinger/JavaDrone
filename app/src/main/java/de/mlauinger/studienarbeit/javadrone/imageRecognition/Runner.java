@@ -35,7 +35,7 @@ public class Runner {
         if (img != null) {
             cvFlip(img, img, 1);// l-r = 90_degrees_steps_anti_clockwise
             IplImage rgbImg = cvCloneImage(img);
-            cvCvtColor(img, img, CV_BGR2HSV);
+            //cvCvtColor(img, img, CV_BGR2HSV);
             IplImage detectThrs = getThresholdImage(img);
             if(storedPrefs.getBoolean("alt_image",false)){
                 returnImage = detectThrs;
