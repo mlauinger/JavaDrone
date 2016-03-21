@@ -22,10 +22,10 @@ public final class DroneConfigurationController implements SharedPreferences.OnS
     public static String DRONE_MAX_ALTITUDE = "control:altitude_max";
 
     public DroneConfigurationController(Context context) {
-        //storedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        //storedPrefs.registerOnSharedPreferenceChangeListener(this);
+        storedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        storedPrefs.registerOnSharedPreferenceChangeListener(this);
         System.out.println("Controller created");
-        //loadAllPreferences();
+        loadAllPreferences();
     }
 
     @Override

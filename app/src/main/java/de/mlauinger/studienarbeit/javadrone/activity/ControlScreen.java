@@ -1,6 +1,7 @@
 package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -25,6 +26,7 @@ import org.bytedeco.javacv.AndroidFrameConverter;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 
+import static java.lang.Thread.sleep;
 import static org.bytedeco.javacpp.opencv_core.*;
 
 public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
@@ -46,6 +48,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     OpenCVFrameConverter.ToIplImage converterToIplImage;
     Frame frame;
     int count = 0;
+    boolean isFlying;
 
 
     @Override
@@ -85,9 +88,16 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         flyBackward.setEnabled(true);
         turnLeft.setEnabled(true);
         turnRight.setEnabled(true);
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        isFlying = true;
     }
 
     public void doEmergency(View view) {
+        isFlying = false;
         droneController.emergencyShutdown();
     }
 
@@ -117,6 +127,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void doLanding(View view) {
+        isFlying=false;
         droneController.performLanding();
         takeoff.setEnabled(true);
         landing.setEnabled(false);
@@ -138,6 +149,11 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
+    }
+
+    public void openSettings(View view) {
+        Intent openSettings = new Intent(this, SettingsScreen.class);
+        startActivity(openSettings);
     }
 
     private class VideoDisplayer extends AsyncTask<Void, Integer, Void> {
@@ -163,10 +179,12 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         protected Void doInBackground(Void... params) {
             Bitmap bitmap = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
             bitmap.setDensity(100);
-            frame = converterToBitmap.convert(bitmap);
-            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame), droneController);
-            frame = converterToIplImage.convert(image);
-            bitmap = converterToBitmap.convert(frame);
+            if(isFlying) {
+                frame = converterToBitmap.convert(bitmap);
+                opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame), droneController);
+                frame = converterToIplImage.convert(image);
+                bitmap = converterToBitmap.convert(frame);
+            }
             b = bitmap;
             b.setDensity(100);
             count++;
