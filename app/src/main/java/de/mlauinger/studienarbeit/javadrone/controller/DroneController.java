@@ -6,15 +6,14 @@ import com.codeminders.ardrone.DroneVideoListener;
 import java.io.IOException;
 
 import de.mlauinger.studienarbeit.javadrone.R;
-import de.mlauinger.studienarbeit.javadrone.activity.ControlScreen;
 
 public class DroneController {
 
     private static ARDrone drone;
 
-    public void sendConfigurations(DroneConfigurationController configController) {
-        configController.sendAllPreferencesToDrone(drone);
-    }
+    //public void sendConfigurations(DroneConfigurationController configController) {
+        //configController.sendAllPreferencesToDrone(drone);
+    //}
 
     public void setDrone(ARDrone arDrone) {
         drone = arDrone;
