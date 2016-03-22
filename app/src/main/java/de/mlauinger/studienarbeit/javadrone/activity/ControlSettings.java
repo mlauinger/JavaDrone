@@ -2,11 +2,11 @@ package de.mlauinger.studienarbeit.javadrone.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -22,15 +22,16 @@ import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
 
-public class ControlSettings extends AppCompatActivity implements DroneVideoListener {
+public class ControlSettings extends AppCompatActivity implements DroneVideoListener{
 
     private FrameLayout settingsContainer;
-    private Switch toggleAutomatic;
     private ImageView droneVideo;
     private Runner runner;
+    Frame frame;
     private AndroidFrameConverter converterToBitmap;
     private OpenCVFrameConverter.ToIplImage converterToIplImage;
     private DroneController droneController;
+    public boolean automaticState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,19 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
         converterToBitmap = new AndroidFrameConverter();
         converterToIplImage = new OpenCVFrameConverter.ToIplImage();
         droneController = new DroneController();
+        DroneController.addImageListender(this);
     }
 
     private void initializeViewElements() {
         settingsContainer = (FrameLayout) findViewById(R.id.settings_fragment);
-        toggleAutomatic = (Switch) findViewById(R.id.toggle_automatic);
+        Switch toggleAutomatic = (Switch) findViewById(R.id.toggle_automatic);
         droneVideo = (ImageView) findViewById(R.id.droneVideoStream);
+        toggleAutomatic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                automaticState = isChecked;
+            }
+        });
     }
 
     public void switchScreen(View view) {
@@ -95,27 +103,24 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
             scansize = scan;
             w = width;
             h = height;
-
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            b = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
+            Bitmap bitmap = Bitmap.createBitmap(rgbArray, offset, scansize, w, h, Bitmap.Config.RGB_565);
+            bitmap.setDensity(100);
+            frame = converterToBitmap.convert(bitmap);
+            opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame), droneController, automaticState);
+            frame = converterToIplImage.convert(image);
+            bitmap = converterToBitmap.convert(frame);
+            b = bitmap;
             b.setDensity(100);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void param) {
-            ((BitmapDrawable) droneVideo.getDrawable()).getBitmap().recycle();
-            if (toggleAutomatic.isSelected()) {
-
-                Frame frame = converterToBitmap.convert(b);
-                opencv_core.IplImage image = runner.findCircle(converterToIplImage.convert(frame), droneController);
-
-                frame = converterToIplImage.convert(image);
-                b = converterToBitmap.convert(frame);
-            }
+            //((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
             droneVideo.setImageBitmap(b);
         }
     }
