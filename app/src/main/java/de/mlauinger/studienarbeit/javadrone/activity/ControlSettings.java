@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,12 +23,13 @@ import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
 
-public class ControlSettings extends AppCompatActivity implements DroneVideoListener{
+public class ControlSettings extends AppCompatActivity implements DroneVideoListener {
 
     private FrameLayout settingsContainer;
     private ImageView droneVideo;
+    private Button takeOffAndLand;
     private Runner runner;
-    Frame frame;
+    private Frame frame;
     private AndroidFrameConverter converterToBitmap;
     private OpenCVFrameConverter.ToIplImage converterToIplImage;
     private DroneController droneController;
@@ -70,6 +72,7 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
                 automaticState = isChecked;
             }
         });
+        takeOffAndLand = (Button) findViewById(R.id.landing);
     }
 
     public void switchScreen(View view) {
@@ -88,6 +91,16 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
 
     public void doEmergency(View view) {
         droneController.emergencyShutdown();
+    }
+
+    public void doTakeOff(View view) {
+        if (getString(R.string.takeoff) == takeOffAndLand.getText()) {
+            droneController.performTakeOff();
+            takeOffAndLand.setText(getString(R.string.landing));
+            return;
+        }
+        droneController.performLanding();
+
     }
 
     public void showDroneConfiguration(View view) {
