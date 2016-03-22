@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,18 +14,8 @@ import android.widget.ImageView;
 import com.codeminders.ardrone.DroneVideoListener;
 
 import de.mlauinger.studienarbeit.javadrone.R;
-import de.mlauinger.studienarbeit.javadrone.controller.DroneConfigurationController;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
-import de.mlauinger.studienarbeit.javadrone.imageRecognition.Runner;
-
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_imgproc;
-import org.bytedeco.javacv.AndroidFrameConverter;
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-
-import static org.bytedeco.javacpp.opencv_core.*;
 
 public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
 
@@ -41,7 +30,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     Button turnLeft;
     Button turnRight;
     ImageView droneStream;
-    DroneConfigurationController configController;
+    //DroneConfigurationController configController;
 
 
     @Override
@@ -49,8 +38,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
         droneController = new DroneController();
-        configController = new DroneConfigurationController(this);
-        droneController.sendConfigurations(configController);
+        //configController = new DroneConfigurationController(this);
+        //droneController.sendConfigurations(configController);
         initializeViewElements();
         DroneController.addImageListender(this);
     }
@@ -90,28 +79,28 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void flyForward(View view) {
-        droneController.flyDrone(-1f, 0);
+        droneController.flyDrone(-0.01f, 0);
     }
 
     public void flyBackward(View view) {
-        droneController.flyDrone(1f, 0);
+        droneController.flyDrone(0.01f, 0);
     }
 
     public void flyLeft(View view) {
-        droneController.flyDrone(0, -1f);
+        droneController.flyDrone(0, -0.01f);
     }
 
     public void flyRight(View view) {
-        droneController.flyDrone(0, 1f);
+        droneController.flyDrone(0, 0.01f);
     }
 
 
     public void turnLeft(View view) {
-        droneController.turnDrone(-1f);
+        droneController.turnDrone(-0.01f);
     }
 
     public void turnRight(View view) {
-        droneController.turnDrone(1f);
+        droneController.turnDrone(0.01f);
     }
 
     public void doLanding(View view) {
