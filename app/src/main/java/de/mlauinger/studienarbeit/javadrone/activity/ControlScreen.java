@@ -44,6 +44,18 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         DroneController.addImageListender(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        droneController.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        droneController.resume();
+    }
+
     private void initializeViewElements() {
         landing = (Button) findViewById(R.id.landing);
         takeoff = (Button) findViewById(R.id.takeoff);

@@ -48,6 +48,18 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
         DroneController.addImageListender(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        droneController.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        droneController.resume();
+    }
+
     private void initializeViewElements() {
         settingsContainer = (FrameLayout) findViewById(R.id.settings_fragment);
         Switch toggleAutomatic = (Switch) findViewById(R.id.toggle_automatic);

@@ -78,4 +78,14 @@ public class DroneController {
     public static void addImageListender(DroneVideoListener videoScreen) {
         drone.addImageListener(videoScreen);
     }
+
+    public void pause() {
+        drone.pauseVideo();
+        drone.pauseNavData();
+    }
+
+    public void resume() {
+        drone.resumeVideo();
+        drone.resumeNavData();
+    }
 }
