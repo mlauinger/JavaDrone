@@ -30,7 +30,7 @@ public class Runner {
     }
 
 
-    public IplImage findCircle(IplImage img, DroneController controller) {
+    public IplImage findCircle(IplImage img, DroneController controller,boolean autofly) {
         IplImage returnImage = img;
         if (img != null) {
             cvFlip(img, img, 1);// l-r = 90_degrees_steps_anti_clockwise
@@ -52,7 +52,9 @@ public class Runner {
             circlePos.setRadius((int) (h + w) / 2);
             circlePos.setHeight(img.height());
             circlePos.setWidth(img.width());
-            movement.followCircle(circlePos,controller);
+            if(autofly) {
+                movement.followCircle(circlePos, controller);
+            }
         }
         try {
             Thread.sleep(INTERVAL);
