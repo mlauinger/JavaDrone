@@ -37,7 +37,7 @@
             android:label="@string/title_activity_control_settings"
             android:parentActivityName=".activity.StartScreen"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape">
+            android:screenOrientation="reverseLandscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.mlauinger.studienarbeit.javadrone.activity.StartScreen" />
