@@ -17,7 +17,7 @@ import de.mlauinger.studienarbeit.javadrone.R;
 import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
 
-public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
+public class ControlScreen extends AppCompatActivity {
 
     DroneController droneController;
     Button landing;
@@ -41,19 +41,19 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         //configController = new DroneConfigurationController(this);
         //droneController.sendConfigurations(configController);
         initializeViewElements();
-        DroneController.addImageListender(this);
+        //DroneController.addImageListender(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        droneController.pause();
+    //    droneController.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        droneController.resume();
+      //  droneController.resume();
     }
 
     private void initializeViewElements() {
@@ -133,7 +133,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         droneConfigurations.show();
     }
 
-    @Override
+  /*  @Override
     public void frameReceived(int startX, int startY, int w, int h,
                               int[] rgbArray, int offset, int scansize) {
         (new VideoDisplayer(startX, startY, w, h, rgbArray, offset, scansize)).execute();
@@ -168,8 +168,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
         @Override
         protected void onPostExecute(Void param) {
 
-            ((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
+            //((BitmapDrawable) droneStream.getDrawable()).getBitmap().recycle();
             droneStream.setImageBitmap(b);
         }
-    }
+    }*/
 }

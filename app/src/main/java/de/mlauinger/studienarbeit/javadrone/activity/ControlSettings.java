@@ -53,13 +53,13 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
     @Override
     protected void onPause() {
         super.onPause();
-        droneController.pause();
+        //droneController.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        droneController.resume();
+        //droneController.resume();
     }
 
     private void initializeViewElements() {
@@ -72,7 +72,7 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
                 automaticState = isChecked;
             }
         });
-        takeOffAndLand = (Button) findViewById(R.id.landing);
+        takeOffAndLand = (Button) findViewById(R.id.takeoff);
     }
 
     public void switchScreen(View view) {
