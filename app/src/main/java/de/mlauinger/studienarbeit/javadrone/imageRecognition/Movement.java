@@ -18,7 +18,7 @@ public class Movement {
     private static final int PERSENTAGE = 20;
     static volatile int counter = 0;
 
-    public void followCircle(CirclePos circle, DroneController controller) {
+    public void followCircle(CirclePos circle, DroneController drone) {
         //Circle not detected
         counter++;
         if (counter < 10) {
@@ -35,14 +35,14 @@ public class Movement {
             //Turn left to move Circle to the Center of the Image
             if (circle.getPosx() - circle.getWidth() / 2 < 0) {
                 System.out.println("Turn left");
-                controller.turnLeft();
+                drone.turnLeft();
                 return;
             }
 
             //Turn right to move Circle to the Center of the Image
             if (circle.getPosx() - circle.getWidth() / 2 > 0) {
                 System.out.println("Turn right");
-                controller.turnRight();
+                drone.turnRight();
                 return;
             }
 
@@ -54,7 +54,7 @@ public class Movement {
             //get closer to Circle to adjust the size of the circle
             if (circle.getRadius() < circle.getWidth() / CIRCLE_SIZE) {
                 System.out.println("move closer");
-                controller.moveForward();
+                drone.moveForward();
                 return;
             }
 
@@ -62,7 +62,7 @@ public class Movement {
             //move away to Circle to adjust the size of the circle
             if (circle.getRadius() > circle.getWidth() / CIRCLE_SIZE) {
                 System.out.println("move away");
-                controller.moveBackward();
+                drone.moveBackward();
                 return;
             }
         }

@@ -19,7 +19,7 @@ import de.mlauinger.studienarbeit.javadrone.dialogs.CustomNotification;
 
 public class ControlScreen extends AppCompatActivity implements DroneVideoListener {
 
-    DroneController droneController;
+    DroneController drone;
     Button landing;
     Button takeoff;
     Button emergency;
@@ -37,9 +37,9 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
-        droneController = new DroneController();
+        drone = new DroneController();
         //configController = new DroneConfigurationController(this);
-        //droneController.sendConfigurations(configController);
+        //drone.sendConfigurations(configController);
         initializeViewElements();
         DroneController.addImageListender(this);
     }
@@ -47,13 +47,13 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     @Override
     protected void onPause() {
         super.onPause();
-        droneController.pause();
+        drone.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        droneController.resume();
+        drone.resume();
     }
 
     private void initializeViewElements() {
@@ -75,7 +75,7 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void doTakeOff(View view) {
-        droneController.performTakeOff();
+        drone.performTakeOff();
         takeoff.setEnabled(false);
         landing.setEnabled(true);
         flyLeft.setEnabled(true);
@@ -87,36 +87,36 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void doEmergency(View view) {
-        droneController.emergencyShutdown();
+        drone.emergencyShutdown();
     }
 
     public void flyForward(View view) {
-        droneController.moveForward();
+        drone.moveForward();
     }
 
     public void flyBackward(View view) {
-        droneController.moveBackward();
+        drone.moveBackward();
     }
 
     public void flyLeft(View view) {
-        droneController.moveLeft();
+        drone.moveLeft();
     }
 
     public void flyRight(View view) {
-        droneController.moveRight();
+        drone.moveRight();
     }
 
 
     public void turnLeft(View view) {
-        droneController.turnLeft();
+        drone.turnLeft();
     }
 
     public void turnRight(View view) {
-        droneController.turnRight();
+        drone.turnRight();
     }
 
     public void doLanding(View view) {
-        droneController.performLanding();
+        drone.performLanding();
         takeoff.setEnabled(true);
         landing.setEnabled(false);
         flyLeft.setEnabled(false);
@@ -128,8 +128,8 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void showDroneConfiguration(View view) {
-        System.out.println(droneController.getConfiguration());
-        Dialog droneConfigurations = new CustomNotification().showNotification(this, "Drone Configuration", droneController.getConfiguration());
+        System.out.println(drone.getConfiguration());
+        Dialog droneConfigurations = new CustomNotification().showNotification(this, "Drone Configuration", drone.getConfiguration());
         droneConfigurations.show();
     }
 
