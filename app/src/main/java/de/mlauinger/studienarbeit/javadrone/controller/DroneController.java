@@ -10,6 +10,8 @@ import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyBackwardCommand;
 import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyForwardCommand;
 import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyLeftCommand;
 import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyRightCommand;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.TurnLeftCommand;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.TurnRightCommand;
 
 public class DroneController {
 
@@ -83,13 +85,15 @@ public class DroneController {
         return drone.readDroneConfiguration();
     }
 
-    public void turnDrone(float left_right) {
+    public void turnLeft() {
         if (null != drone) {
-            try {
-                drone.move(0, 0, 0, left_right);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            new TurnLeftCommand(drone);
+        }
+    }
+
+    public void turnRight() {
+        if (null != drone) {
+            new TurnRightCommand(drone);
         }
     }
 

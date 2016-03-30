@@ -35,14 +35,14 @@ public class Movement {
             //Turn left to move Circle to the Center of the Image
             if (circle.getPosx() - circle.getWidth() / 2 < 0) {
                 System.out.println("Turn left");
-                controller.turnDrone(-0.01f);
+                controller.turnLeft();
                 return;
             }
 
             //Turn right to move Circle to the Center of the Image
             if (circle.getPosx() - circle.getWidth() / 2 > 0) {
                 System.out.println("Turn right");
-                controller.turnDrone(0.01f);
+                controller.turnRight();
                 return;
             }
 

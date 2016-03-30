@@ -108,11 +108,11 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
 
 
     public void turnLeft(View view) {
-        droneController.turnDrone(-0.01f);
+        droneController.turnLeft();
     }
 
     public void turnRight(View view) {
-        droneController.turnDrone(0.01f);
+        droneController.turnRight();
     }
 
     public void doLanding(View view) {
