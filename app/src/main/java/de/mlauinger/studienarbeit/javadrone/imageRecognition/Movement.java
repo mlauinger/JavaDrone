@@ -4,16 +4,16 @@ import de.mlauinger.studienarbeit.javadrone.controller.DroneController;
 
 public class Movement {
 
-/*
-Values:
-    255
-    255
-    230
-    224
-    157
-    0
+    /*
+    Values:
+        255
+        255
+        230
+        224
+        157
+        0
 
- */
+     */
     private static final int CIRCLE_SIZE = 4;
     private static final int PERSENTAGE = 20;
     static volatile int counter = 0;
@@ -54,7 +54,7 @@ Values:
             //get closer to Circle to adjust the size of the circle
             if (circle.getRadius() < circle.getWidth() / CIRCLE_SIZE) {
                 System.out.println("move closer");
-                //controller.flyDrone(-0.01f, 0);
+                controller.moveForward();
                 return;
             }
 
@@ -62,7 +62,7 @@ Values:
             //move away to Circle to adjust the size of the circle
             if (circle.getRadius() > circle.getWidth() / CIRCLE_SIZE) {
                 System.out.println("move away");
-                controller.flyDrone(0.01f, 0);
+                controller.moveBackward();
                 return;
             }
         }

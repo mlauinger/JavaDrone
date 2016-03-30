@@ -91,19 +91,19 @@ public class ControlScreen extends AppCompatActivity implements DroneVideoListen
     }
 
     public void flyForward(View view) {
-        droneController.flyDrone(-0.01f, 0);
+        droneController.moveForward();
     }
 
     public void flyBackward(View view) {
-        droneController.flyDrone(0.01f, 0);
+        droneController.moveBackward();
     }
 
     public void flyLeft(View view) {
-        droneController.flyDrone(0, -0.01f);
+        droneController.moveLeft();
     }
 
     public void flyRight(View view) {
-        droneController.flyDrone(0, 0.01f);
+        droneController.moveRight();
     }
 
 

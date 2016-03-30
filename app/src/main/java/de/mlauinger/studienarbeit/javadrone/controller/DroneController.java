@@ -6,13 +6,17 @@ import com.codeminders.ardrone.DroneVideoListener;
 import java.io.IOException;
 
 import de.mlauinger.studienarbeit.javadrone.R;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyBackwardCommand;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyForwardCommand;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyLeftCommand;
+import de.mlauinger.studienarbeit.javadrone.droneCommands.FlyRightCommand;
 
 public class DroneController {
 
     private static ARDrone drone;
 
     //public void sendConfigurations(DroneConfigurationController configController) {
-        //configController.sendAllPreferencesToDrone(drone);
+    //configController.sendAllPreferencesToDrone(drone);
     //}
 
     public void setDrone(ARDrone arDrone) {
@@ -41,13 +45,27 @@ public class DroneController {
         }
     }
 
-    public void flyDrone(float forward_backward, float left_right) {
+    public void moveForward() {
         if (null != drone) {
-            try {
-                drone.move(left_right, forward_backward, 0, 0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            new FlyForwardCommand(drone);
+        }
+    }
+
+    public void moveBackward() {
+        if (null != drone) {
+            new FlyBackwardCommand(drone);
+        }
+    }
+
+    public void moveLeft() {
+        if (null != drone) {
+            new FlyLeftCommand(drone);
+        }
+    }
+
+    public void moveRight() {
+        if (null != drone) {
+            new FlyRightCommand(drone);
         }
     }
 
