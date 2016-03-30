@@ -15,4 +15,12 @@ public abstract class MovementCommand {
             e.printStackTrace();
         }
     }
+
+    void turn(ARDrone drone, float leftRight) {
+        try {
+            drone.move(0, 0, 0, leftRight);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
