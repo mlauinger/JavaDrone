@@ -24,18 +24,7 @@
             android:id="@+id/toggle_automatic"
             android:layout_gravity="end|top" />
 
-        <Button
-            android:id="@+id/turnright"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:onClick="turnRight"
-            android:text="i-"
-            android:layout_gravity="right|center_vertical"
-            android:layout_above="@+id/flyright"
-            android:layout_alignRight="@+id/switch_screen"
-            android:layout_alignEnd="@+id/switch_screen" />
+
 
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,9 +49,8 @@
             android:scaleType="centerCrop"
             android:layout_width="24pt"
             android:layout_height="24pt"
-            android:enabled="false"
+            android:enabled="true"
             android:onClick="flyLeft"
-            android:text="&lt;-"
             android:contentDescription="@string/flyleft"
             android:layout_below="@+id/flyforward"
             android:layout_alignRight="@+id/turnleft"
@@ -75,7 +63,7 @@
             android:scaleType="centerCrop"
             android:layout_width="24pt"
             android:layout_height="24pt"
-            android:enabled="false"
+            android:enabled="true"
             android:onClick="flyForward"
             android:contentDescription="@string/flyforward"
             android:layout_above="@+id/flyright"
@@ -88,7 +76,7 @@
             android:scaleType="centerCrop"
             android:layout_width="24pt"
             android:layout_height="24pt"
-            android:enabled="false"
+            android:enabled="true"
             android:onClick="flyRight"
             android:contentDescription="@string/flyright"
             android:layout_alignBottom="@+id/takeoff"
@@ -102,23 +90,38 @@
             android:scaleType="centerCrop"
             android:layout_width="24pt"
             android:layout_height="24pt"
-            android:enabled="false"
+            android:enabled="true"
             android:onClick="flyBackward"
             android:contentDescription="@string/flyback"
             android:layout_below="@+id/flyright"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <ImageButton
+            android:src="@drawable/turnleft"
             android:id="@+id/turnleft"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
+            android:scaleType="centerCrop"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
+            android:enabled="true"
             android:onClick="turnLeft"
-            android:text="i-"
             android:layout_alignTop="@+id/flyforward"
             android:layout_alignLeft="@+id/switch_screen"
             android:layout_alignStart="@+id/switch_screen" />
+
+        <ImageButton
+            android:src="@drawable/turnright"
+            android:id="@+id/turnright"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
+            android:scaleType="centerCrop"
+            android:enabled="true"
+            android:onClick="turnRight"
+            android:layout_gravity="right|center_vertical"
+            android:layout_above="@+id/flyright"
+            android:layout_alignRight="@+id/switch_screen"
+            android:layout_alignEnd="@+id/switch_screen" />
 
         <Button
             android:id="@+id/takeoff"

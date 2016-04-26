@@ -91,11 +91,13 @@
         android:contentDescription="@string/flyback"
          />
 
-    <Button
+    <ImageButton
+        android:src="@drawable/turnleft"
         android:id="@+id/turnleft"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
         android:layout_above="@+id/flyleft"
         android:layout_toStartOf="@+id/flyforward"
         android:layout_toLeftOf="@id/flyforward"
@@ -103,11 +105,13 @@
         android:onClick="turnLeft"
         android:text="i-" />
 
-    <Button
+    <ImageButton
+        android:src="@drawable/turnright"
         android:id="@+id/turnright"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
+        android:scaleType="centerCrop"
         android:layout_above="@+id/flyright"
         android:layout_toEndOf="@+id/flyforward"
         android:layout_toRightOf="@id/flyforward"
