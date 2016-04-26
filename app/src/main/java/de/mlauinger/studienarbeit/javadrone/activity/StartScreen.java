@@ -52,8 +52,8 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private void processToControl() {
-        Intent startControls = new Intent(this, ControlScreen.class);
-        startActivity(startControls);
+        Intent openSecondScreen = new Intent(this, ControlSettings.class);
+        startActivity(openSecondScreen);
     }
 
     public void openSettings(View view) {
