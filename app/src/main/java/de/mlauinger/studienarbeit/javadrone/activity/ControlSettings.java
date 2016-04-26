@@ -28,12 +28,20 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
     private FrameLayout settingsContainer;
     private ImageView droneVideo;
     private Button takeOffAndLand;
+    private Button flyLeft;
+    private Button flyRight;
+    private Button flyForward;
+    private Button flyBackward;
+    private Button turnLeft;
+    private Button turnRight;
     private Runner runner;
     private Frame frame;
     private AndroidFrameConverter converterToBitmap;
     private OpenCVFrameConverter.ToIplImage converterToIplImage;
     private DroneController droneController;
+    private int showControls = View.INVISIBLE;
     public boolean automaticState = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +81,21 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
             }
         });
         takeOffAndLand = (Button) findViewById(R.id.landing);
+        flyLeft = (Button) findViewById(R.id.flyleft);
+        flyRight = (Button) findViewById(R.id.flyright);
+        flyForward = (Button) findViewById(R.id.flyforward);
+        flyBackward = (Button) findViewById(R.id.flybackward);
+        turnLeft = (Button) findViewById(R.id.turnleft);
+        turnRight = (Button) findViewById(R.id.turnright);
+    }
+
+    private void changeControlState() {
+        flyLeft.setVisibility(showControls);
+        flyRight.setVisibility(showControls);
+        flyForward.setVisibility(showControls);
+        flyBackward.setVisibility(showControls);
+        turnLeft.setVisibility(showControls);
+        turnRight.setVisibility(showControls);
     }
 
     public void switchScreen(View view) {
@@ -103,7 +126,38 @@ public class ControlSettings extends AppCompatActivity implements DroneVideoList
 
     }
 
-    public void showDroneConfiguration(View view) {
+    public void flyForward(View view) {
+        droneController.moveForward();
+    }
+
+    public void flyBackward(View view) {
+        droneController.moveBackward();
+    }
+
+    public void flyLeft(View view) {
+        droneController.moveLeft();
+    }
+
+    public void flyRight(View view) {
+        droneController.moveRight();
+    }
+
+
+    public void turnLeft(View view) {
+        droneController.turnLeft();
+    }
+
+    public void turnRight(View view) {
+        droneController.turnRight();
+    }
+
+    public void showManualControls(View view) {
+        if(View.INVISIBLE == showControls) {
+            showControls = View.VISIBLE;
+        } else {
+            showControls = View.INVISIBLE;
+        }
+        changeControlState();
     }
 
     @Override

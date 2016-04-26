@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="@string/show_config"
         android:id="@+id/show_config"
-        android:onClick="showDroneConfiguration"
+        android:onClick="showManualControls"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/droneVideoStream"
         android:layout_alignEnd="@+id/droneVideoStream" />

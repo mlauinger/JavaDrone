@@ -24,6 +24,19 @@
             android:id="@+id/toggle_automatic"
             android:layout_gravity="end|top" />
 
+        <Button
+            android:id="@+id/turnright"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="turnRight"
+            android:text="i-"
+            android:layout_gravity="right|center_vertical"
+            android:layout_above="@+id/flyright"
+            android:layout_alignRight="@+id/switch_screen"
+            android:layout_alignEnd="@+id/switch_screen" />
+
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/settings_fragment"
@@ -37,6 +50,64 @@
             tools:context=".ControlScreen">
 
         </FrameLayout>
+
+        <Button
+            android:id="@+id/flyleft"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="flyLeft"
+            android:text="&lt;-"
+            android:layout_below="@+id/turnleft"
+            android:layout_alignLeft="@+id/turnleft"
+            android:layout_alignStart="@+id/turnleft" />
+
+        <Button
+            android:id="@+id/flyforward"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="flyForward"
+            android:text="^"
+            android:layout_alignTop="@+id/turnright"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/flyright"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="flyRight"
+            android:text="->"
+            android:layout_alignTop="@+id/takeoff"
+            android:layout_alignLeft="@+id/turnright"
+            android:layout_alignStart="@+id/turnright" />
+
+        <Button
+            android:id="@+id/flybackward"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="flyBackward"
+            android:text="D"
+            android:layout_below="@+id/flyright"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/turnleft"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="turnLeft"
+            android:text="i-"
+            android:layout_alignTop="@+id/flyforward"
+            android:layout_alignLeft="@+id/switch_screen"
+            android:layout_alignStart="@+id/switch_screen" />
 
         <Button
             android:id="@+id/takeoff"
@@ -83,8 +154,8 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/switch_screen"
             android:layout_toStartOf="@id/switch_screen"
-            android:onClick="showDroneConfiguration"
-            android:text="@string/show_config" />
+            android:onClick="showManualControls"
+            android:text="@string/show_controls" />
 
 
         <Button
