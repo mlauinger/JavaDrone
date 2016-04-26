@@ -76,4 +76,8 @@
     <string name="automatic">Automatic</string>
     <string name="camera_sigal">Camera signal</string>
     <string name="show_controls">show controls</string>
+    <string name="flyforward">flyForward</string>
+    <string name="flyleft">flyleft</string>
+    <string name="flyright">flyright</string>
+    <string name="flyback">flyback</string>
 </resources>

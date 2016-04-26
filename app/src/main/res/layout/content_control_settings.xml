@@ -37,6 +37,7 @@
             android:layout_alignRight="@+id/switch_screen"
             android:layout_alignEnd="@+id/switch_screen" />
 
+
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/settings_fragment"
@@ -51,49 +52,59 @@
 
         </FrameLayout>
 
-        <Button
+
+        <ImageButton
             android:id="@+id/flyleft"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/left"
+            android:scaleType="centerCrop"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
             android:enabled="false"
             android:onClick="flyLeft"
             android:text="&lt;-"
-            android:layout_below="@+id/turnleft"
-            android:layout_alignLeft="@+id/turnleft"
-            android:layout_alignStart="@+id/turnleft" />
+            android:contentDescription="@string/flyleft"
+            android:layout_below="@+id/flyforward"
+            android:layout_alignRight="@+id/turnleft"
+            android:layout_alignEnd="@+id/turnleft" />
 
-        <Button
+        <ImageButton
             android:id="@+id/flyforward"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/forward"
+            android:scaleType="centerCrop"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
             android:enabled="false"
             android:onClick="flyForward"
-            android:text="^"
-            android:layout_alignTop="@+id/turnright"
+            android:contentDescription="@string/flyforward"
+            android:layout_above="@+id/flyright"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <ImageButton
             android:id="@+id/flyright"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/right"
+            android:scaleType="centerCrop"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
             android:enabled="false"
             android:onClick="flyRight"
-            android:text="->"
-            android:layout_alignTop="@+id/takeoff"
+            android:contentDescription="@string/flyright"
+            android:layout_alignBottom="@+id/takeoff"
             android:layout_alignLeft="@+id/turnright"
             android:layout_alignStart="@+id/turnright" />
 
-        <Button
+        <ImageButton
             android:id="@+id/flybackward"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/backward"
+            android:scaleType="centerCrop"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
             android:enabled="false"
             android:onClick="flyBackward"
-            android:text="D"
+            android:contentDescription="@string/flyback"
             android:layout_below="@+id/flyright"
             android:layout_centerHorizontal="true" />
 

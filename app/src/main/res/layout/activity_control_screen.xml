@@ -33,53 +33,63 @@
         android:onClick="doTakeOff"
         android:text="@string/takeoff" />
 
-    <Button
+    <ImageButton
         android:id="@+id/flyleft"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/left"
+        android:scaleType="centerCrop"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:enabled="false"
         android:onClick="flyLeft"
-        android:text="&lt;-" />
+        android:text="&lt;-"
+        android:contentDescription="@string/flyleft" />
 
-    <Button
+    <ImageButton
         android:id="@+id/flyforward"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/forward"
+        android:scaleType="centerCrop"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
         android:layout_above="@+id/flyleft"
         android:layout_toEndOf="@+id/flyleft"
         android:layout_toRightOf="@+id/flyleft"
         android:enabled="false"
         android:onClick="flyForward"
-        android:text="^" />
+        android:contentDescription="@string/flyforward" />
 
-    <Button
+    <ImageButton
         android:id="@+id/flyright"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/right"
+        android:scaleType="centerCrop"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/flyforward"
         android:layout_toRightOf="@+id/flyforward"
         android:enabled="false"
         android:onClick="flyRight"
-        android:text="->" />
+        android:contentDescription="@string/flyright" />
 
-    <Button
+    <ImageButton
         android:id="@+id/flybackward"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/backward"
+        android:scaleType="centerCrop"
+        android:layout_width="24pt"
+        android:layout_height="24pt"
         android:layout_below="@+id/flyleft"
         android:layout_toEndOf="@+id/flyleft"
         android:layout_toRightOf="@+id/flyleft"
         android:enabled="false"
         android:onClick="flyBackward"
-        android:text="D" />
+        android:contentDescription="@string/flyback"
+         />
 
     <Button
         android:id="@+id/turnleft"
